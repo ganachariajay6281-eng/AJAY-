@@ -187,6 +187,15 @@ body {
     gap: 12px;
 }
 
+/* Focus visible outline for accessibility */
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
 /* Buttons */
 .icon-btn {
     position: relative;
