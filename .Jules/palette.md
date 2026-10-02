@@ -1,0 +1,3 @@
+## 2025-05-18 - Interactive Custom Elements Accessibility
+**Learning:** Custom interactive UI elements such as candles and gift boxes rendered as simple `<div>` elements are inaccessible to screen reader and keyboard users unless assigned `role="button"`, `tabindex="0"`, dynamic `aria-label` updates, `:focus-visible` outline styles, and `Enter`/`Space` keydown event handlers.
+**Action:** When building or enhancing interactive custom components without native `<button>` tags, always ensure `role="button"`, `tabindex="0"`, focus states, and keyboard event listeners are attached alongside click handlers.
