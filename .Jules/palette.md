@@ -1,0 +1,3 @@
+## 2025-02-15 - Interactive Custom UI Components & Modal ARIA Accessibility
+**Learning:** Custom interactive elements (like birthday candles or surprise gift boxes) built using standard `<div>` elements need explicit `role="button"`, `tabindex="0"`, `aria-label`, and `keydown` (`Enter`/`Space`) event handlers to be discoverable and operable for keyboard and screen reader users. Additionally, modal overlays require `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, and an `Escape` key handler for proper dialog semantics and dismissal.
+**Action:** When working with custom non-button interactive elements or popup modals, always pair click handlers with keyboard handlers (`Enter`/`Space`/`Escape`) and full ARIA dialog attributes.
