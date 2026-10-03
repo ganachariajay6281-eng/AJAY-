@@ -151,12 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('aria-label', `Candle ${i + 1}: click or press enter to blow out`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -311,13 +320,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
+    function openGiftModal() {
         giftModal.classList.add('active');
         triggerConfettiBurst();
+    }
+
+    giftBox.addEventListener('click', openGiftModal);
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGiftModal();
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {
         giftModal.classList.remove('active');
+    });
+
+    // Close active modals on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            customizerModal.classList.remove('active');
+            celebrationModal.classList.remove('active');
+            giftModal.classList.remove('active');
+        }
     });
 
     // --- 6. Customization Modal & Theme Engine ---
