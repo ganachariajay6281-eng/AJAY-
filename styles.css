@@ -210,6 +210,11 @@ body {
     transform: translateY(-2deg);
 }
 
+.icon-btn:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+}
+
 .icon-btn.active {
     background: var(--primary);
     color: #ffffff;
@@ -636,6 +641,11 @@ body {
 
 .gift-box:hover {
     transform: translateY(-5deg) rotate(-2deg);
+}
+
+.gift-box:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 6px;
 }
 
 .gift-lid {
