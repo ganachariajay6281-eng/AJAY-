@@ -311,9 +311,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
+    function openGiftModal() {
         giftModal.classList.add('active');
         triggerConfettiBurst();
+    }
+
+    giftBox.addEventListener('click', openGiftModal);
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGiftModal();
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {
