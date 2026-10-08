@@ -187,6 +187,12 @@ body {
     gap: 12px;
 }
 
+/* Focus Visible Global Outline Styles */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
 /* Buttons */
 .icon-btn {
     position: relative;
@@ -448,8 +454,15 @@ body {
     transition: transform 0.2s ease;
 }
 
-.candle:hover {
+.candle:hover,
+.candle:focus-visible {
     transform: scale(1.1);
+}
+
+.candle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .candle .stick {
@@ -634,8 +647,14 @@ body {
     align-items: center;
 }
 
-.gift-box:hover {
+.gift-box:hover,
+.gift-box:focus-visible {
     transform: translateY(-5deg) rotate(-2deg);
+}
+
+.gift-box:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 6px;
 }
 
 .gift-lid {
