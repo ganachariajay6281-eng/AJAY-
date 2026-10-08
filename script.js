@@ -151,12 +151,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('aria-label', `Candle ${i + 1}, lit. Click or press Space to blow out.`);
+            candle.setAttribute('aria-pressed', 'false');
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -164,6 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function blowCandle(candleEl) {
         if (!candleEl.classList.contains('blown-out')) {
             candleEl.classList.add('blown-out');
+            const index = parseInt(candleEl.dataset.index, 10) + 1;
+            candleEl.setAttribute('aria-label', `Candle ${index}, blown out.`);
+            candleEl.setAttribute('aria-pressed', 'true');
             playCandleSound();
             checkAllCandlesBlown();
         }
@@ -175,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (allCandles.length > 0 && allCandles.length === blownCandles.length) {
             setTimeout(() => {
                 celebrationModal.classList.add('active');
+                celebrationModal.setAttribute('aria-hidden', 'false');
                 triggerConfettiBurst();
             }, 500);
         }
@@ -182,16 +196,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     blowAllBtn.addEventListener('click', () => {
         const allCandles = candlesLayer.querySelectorAll('.candle');
-        allCandles.forEach((candle) => candle.classList.add('blown-out'));
+        allCandles.forEach((candle) => {
+            candle.classList.add('blown-out');
+            const index = parseInt(candle.dataset.index, 10) + 1;
+            candle.setAttribute('aria-label', `Candle ${index}, blown out.`);
+            candle.setAttribute('aria-pressed', 'true');
+        });
         playCandleSound();
         setTimeout(() => {
             celebrationModal.classList.add('active');
+            celebrationModal.setAttribute('aria-hidden', 'false');
             triggerConfettiBurst();
         }, 400);
     });
 
     closeCelebrationBtn.addEventListener('click', () => {
         celebrationModal.classList.remove('active');
+        celebrationModal.setAttribute('aria-hidden', 'true');
     });
 
     // --- 4. Audio Synthesizer (Happy Birthday Tune via Web Audio API) ---
@@ -311,22 +332,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
+    function openGiftModal() {
         giftModal.classList.add('active');
+        giftModal.setAttribute('aria-hidden', 'false');
         triggerConfettiBurst();
+    }
+
+    giftBox.addEventListener('click', openGiftModal);
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGiftModal();
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {
         giftModal.classList.remove('active');
+        giftModal.setAttribute('aria-hidden', 'true');
     });
 
     // --- 6. Customization Modal & Theme Engine ---
     customizeBtn.addEventListener('click', () => {
         customizerModal.classList.add('active');
+        customizerModal.setAttribute('aria-hidden', 'false');
     });
 
     closeModalBtn.addEventListener('click', () => {
         customizerModal.classList.remove('active');
+        customizerModal.setAttribute('aria-hidden', 'true');
+        celebrationModal.setAttribute('aria-hidden', 'true');
     });
 
     // Theme selector options

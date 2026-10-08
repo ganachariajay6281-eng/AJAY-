@@ -124,7 +124,7 @@
 
                 <!-- Interactive Wishes / Gift Box Section -->
                 <div class="gift-section">
-                    <div class="gift-box" id="gift-box" title="Click to open your gift!">
+                    <div class="gift-box" id="gift-box" role="button" tabindex="0" aria-label="Open gift box" title="Click to open your gift!">
                         <div class="gift-lid">
                             <div class="gift-bow"></div>
                         </div>
@@ -140,11 +140,11 @@
     </div>
 
     <!-- Customization Modal Overlay -->
-    <div class="modal-overlay" id="customizer-modal" aria-hidden="true">
+    <div class="modal-overlay" id="customizer-modal" role="dialog" aria-modal="true" aria-labelledby="customizer-title" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2><i class="fa-solid fa-sliders"></i> Customize Birthday Card</h2>
-                <button class="close-btn" id="close-modal-btn">&times;</button>
+                <h2 id="customizer-title"><i class="fa-solid fa-sliders"></i> Customize Birthday Card</h2>
+                <button class="close-btn" id="close-modal-btn" aria-label="Close customizer modal">&times;</button>
             </div>
             <form id="customize-form" class="modal-body">
                 <div class="form-group">
@@ -194,20 +194,20 @@
     </div>
 
     <!-- Celebration Popup Modal -->
-    <div class="celebration-modal" id="celebration-modal">
+    <div class="celebration-modal" id="celebration-modal" role="dialog" aria-modal="true" aria-labelledby="celebration-title" aria-hidden="true">
         <div class="celebration-card">
             <div class="celebration-icon">🎂✨</div>
-            <h2>Make A Wish!</h2>
+            <h2 id="celebration-title">Make A Wish!</h2>
             <p>All candles are blown out! May all your dreams and wishes come true this year!</p>
             <button id="close-celebration-btn" class="primary-btn">Yay! Thank You! 🎉</button>
         </div>
     </div>
 
     <!-- Gift Revealed Modal -->
-    <div class="gift-modal" id="gift-modal">
+    <div class="gift-modal" id="gift-modal" role="dialog" aria-modal="true" aria-labelledby="gift-title" aria-hidden="true">
         <div class="gift-reveal-card">
             <div class="gift-sparkles">🎁✨</div>
-            <h2>Special Surprise!</h2>
+            <h2 id="gift-title">Special Surprise!</h2>
             <p id="gift-message">You've unlocked a year full of happiness, adventure, and sweet surprises!</p>
             <button id="close-gift-modal" class="primary-btn">Awesome! ❤️</button>
         </div>
