@@ -148,9 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
         candlesLayer.innerHTML = '';
         const numCandles = Math.min(Math.max(count, 1), 7); // Show 1 to 7 candles on cake
         for (let i = 0; i < numCandles; i++) {
-            const candle = document.createElement('div');
+            const candle = document.createElement('button');
+            candle.type = 'button';
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('aria-label', `Blow out candle ${i + 1}`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
@@ -164,6 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function blowCandle(candleEl) {
         if (!candleEl.classList.contains('blown-out')) {
             candleEl.classList.add('blown-out');
+            const candleNum = parseInt(candleEl.dataset.index, 10) + 1;
+            candleEl.setAttribute('aria-label', `Candle ${candleNum} blown out`);
             playCandleSound();
             checkAllCandlesBlown();
         }
@@ -311,9 +315,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
+    function openGift() {
         giftModal.classList.add('active');
         triggerConfettiBurst();
+    }
+
+    giftBox.addEventListener('click', openGift);
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGift();
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {
