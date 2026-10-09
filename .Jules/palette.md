@@ -1,0 +1,3 @@
+## 2026-10-09 - Accessible Interactive Canvas/Custom UI Elements
+**Learning:** In interactive celebration cards with custom CSS elements (like candles or gift boxes), custom `<div>` controls lack focus states, screen reader descriptions, and keyboard activation by default. Converting them to `<button type="button">` with CSS resets (`background: none; border: none; padding: 0;`) maintains original custom styling while immediately conferring native accessibility, keyboard tab stop, and aria-label updates.
+**Action:** When adding interactivity to custom visual elements (e.g., candles, cards, widgets), use native `<button>` elements with CSS resets and dynamic `aria-label` attribute updates.
