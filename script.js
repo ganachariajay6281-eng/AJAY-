@@ -151,12 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('aria-label', `Candle ${i + 1}. Click or press Enter to blow out.`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -314,6 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
     giftBox.addEventListener('click', () => {
         giftModal.classList.add('active');
         triggerConfettiBurst();
+    });
+
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            giftModal.classList.add('active');
+            triggerConfettiBurst();
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {
