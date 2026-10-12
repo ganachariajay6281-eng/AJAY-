@@ -187,6 +187,16 @@ body {
     gap: 12px;
 }
 
+/* Focus Visible Global Styles */
+button:focus-visible,
+.candle:focus-visible,
+.gift-box:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
 /* Buttons */
 .icon-btn {
     position: relative;
