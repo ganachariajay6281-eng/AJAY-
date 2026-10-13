@@ -638,6 +638,11 @@ body {
     transform: translateY(-5deg) rotate(-2deg);
 }
 
+.gift-box:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+}
+
 .gift-lid {
     position: absolute;
     top: -16px;
