@@ -1,18 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="pastel">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🎉 Happy Birthday Celebration! 🎉</title>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <!-- Background Canvas for Confetti & Particles -->
     <canvas id="confetti-canvas"></canvas>
 
@@ -21,198 +27,298 @@
 
     <!-- Main Container -->
     <div class="main-wrapper">
-        <!-- Floating Controls Header -->
-        <header class="top-bar">
-            <div class="brand">
-                <span class="icon">🎁</span>
-                <span class="title">Birthday Magic</span>
+      <!-- Floating Controls Header -->
+      <header class="top-bar">
+        <div class="brand">
+          <span class="icon">🎁</span>
+          <span class="title">Birthday Magic</span>
+        </div>
+        <div class="action-buttons">
+          <button
+            id="music-btn"
+            class="icon-btn"
+            title="Toggle Happy Birthday Music"
+            aria-label="Toggle Music"
+          >
+            <i class="fa-solid fa-music"></i>
+            <span class="btn-tooltip">Play Music</span>
+          </button>
+          <button
+            id="confetti-btn"
+            class="icon-btn"
+            title="Trigger Confetti Shower"
+            aria-label="Pop Confetti"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span class="btn-tooltip">Confetti!</span>
+          </button>
+          <button
+            id="customize-btn"
+            class="primary-btn-sm"
+            aria-label="Customize Greeting"
+          >
+            <i class="fa-solid fa-pen-to-square"></i> Customize Card
+          </button>
+        </div>
+      </header>
+
+      <!-- Birthday Hero Card Section -->
+      <main class="content-container">
+        <div class="birthday-card" id="birthday-card">
+          <!-- Decorative Elements -->
+          <div class="card-ribbon">
+            <span>SPECIAL DAY</span>
+          </div>
+
+          <!-- Profile Avatar / Photo Container -->
+          <div class="avatar-wrapper">
+            <div class="avatar-frame">
+              <img
+                id="recipient-photo"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+                alt="Birthday Person"
+              />
+              <div class="avatar-badge">
+                <span id="badge-age">25</span>
+              </div>
             </div>
-            <div class="action-buttons">
-                <button id="music-btn" class="icon-btn" title="Toggle Happy Birthday Music" aria-label="Toggle Music">
-                    <i class="fa-solid fa-music"></i>
-                    <span class="btn-tooltip">Play Music</span>
-                </button>
-                <button id="confetti-btn" class="icon-btn" title="Trigger Confetti Shower" aria-label="Pop Confetti">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span class="btn-tooltip">Confetti!</span>
-                </button>
-                <button id="customize-btn" class="primary-btn-sm" aria-label="Customize Greeting">
-                    <i class="fa-solid fa-pen-to-square"></i> Customize Card
-                </button>
+          </div>
+
+          <!-- Greeting Header -->
+          <div class="greeting-header">
+            <p class="sub-heading">Wishing A Very Happy Birthday To</p>
+            <h1 class="recipient-name" id="display-name">Alex Morgan</h1>
+            <div class="age-banner">
+              <span
+                >Turning <strong id="display-age">25</strong> Today! 🎉</span
+              >
             </div>
-        </header>
+          </div>
 
-        <!-- Birthday Hero Card Section -->
-        <main class="content-container">
-            <div class="birthday-card" id="birthday-card">
-                <!-- Decorative Elements -->
-                <div class="card-ribbon">
-                    <span>SPECIAL DAY</span>
+          <!-- Custom Wish Message -->
+          <div class="wish-container">
+            <p class="wish-text" id="display-wish">
+              "May your day be filled with joy, laughter, endless cake, and
+              unforgettable moments! Wishing you another magnificent year ahead
+              filled with love and success."
+            </p>
+          </div>
+
+          <!-- Interactive 3D Birthday Cake Component -->
+          <div class="cake-section">
+            <p class="cake-instruction" id="cake-instruction">
+              <i class="fa-solid fa-wind"></i> Click candles to blow them out or
+              make a wish!
+            </p>
+            <div class="cake-container">
+              <!-- Candles Container (Generated dynamically or static) -->
+              <div class="candles-layer" id="candles-layer">
+                <div class="candle" data-index="0">
+                  <div class="flame"></div>
+                  <div class="wick"></div>
+                  <div class="stick"></div>
                 </div>
-
-                <!-- Profile Avatar / Photo Container -->
-                <div class="avatar-wrapper">
-                    <div class="avatar-frame">
-                        <img id="recipient-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Birthday Person">
-                        <div class="avatar-badge">
-                            <span id="badge-age">25</span>
-                        </div>
-                    </div>
+                <div class="candle" data-index="1">
+                  <div class="flame"></div>
+                  <div class="wick"></div>
+                  <div class="stick"></div>
                 </div>
-
-                <!-- Greeting Header -->
-                <div class="greeting-header">
-                    <p class="sub-heading">Wishing A Very Happy Birthday To</p>
-                    <h1 class="recipient-name" id="display-name">Alex Morgan</h1>
-                    <div class="age-banner">
-                        <span>Turning <strong id="display-age">25</strong> Today! 🎉</span>
-                    </div>
+                <div class="candle" data-index="2">
+                  <div class="flame"></div>
+                  <div class="wick"></div>
+                  <div class="stick"></div>
                 </div>
-
-                <!-- Custom Wish Message -->
-                <div class="wish-container">
-                    <p class="wish-text" id="display-wish">
-                        "May your day be filled with joy, laughter, endless cake, and unforgettable moments! Wishing you another magnificent year ahead filled with love and success."
-                    </p>
+              </div>
+              <!-- Cake Layers -->
+              <div class="cake-body">
+                <div class="layer layer-top">
+                  <div class="icing"></div>
+                  <div class="drips">
+                    <span></span><span></span><span></span><span></span
+                    ><span></span>
+                  </div>
                 </div>
-
-                <!-- Interactive 3D Birthday Cake Component -->
-                <div class="cake-section">
-                    <p class="cake-instruction" id="cake-instruction">
-                        <i class="fa-solid fa-wind"></i> Click candles to blow them out or make a wish!
-                    </p>
-                    <div class="cake-container">
-                        <!-- Candles Container (Generated dynamically or static) -->
-                        <div class="candles-layer" id="candles-layer">
-                            <div class="candle" data-index="0">
-                                <div class="flame"></div>
-                                <div class="wick"></div>
-                                <div class="stick"></div>
-                            </div>
-                            <div class="candle" data-index="1">
-                                <div class="flame"></div>
-                                <div class="wick"></div>
-                                <div class="stick"></div>
-                            </div>
-                            <div class="candle" data-index="2">
-                                <div class="flame"></div>
-                                <div class="wick"></div>
-                                <div class="stick"></div>
-                            </div>
-                        </div>
-                        <!-- Cake Layers -->
-                        <div class="cake-body">
-                            <div class="layer layer-top">
-                                <div class="icing"></div>
-                                <div class="drips">
-                                    <span></span><span></span><span></span><span></span><span></span>
-                                </div>
-                            </div>
-                            <div class="layer layer-middle">
-                                <div class="filling"></div>
-                            </div>
-                            <div class="layer layer-bottom"></div>
-                            <div class="cake-plate"></div>
-                        </div>
-                    </div>
-
-                    <!-- Make A Wish Banner / Celebration Popup Trigger -->
-                    <button id="blow-all-btn" class="glow-btn">
-                        <i class="fa-solid fa-cake-candles"></i> Blow Out All Candles
-                    </button>
+                <div class="layer layer-middle">
+                  <div class="filling"></div>
                 </div>
-
-                <!-- Interactive Wishes / Gift Box Section -->
-                <div class="gift-section">
-                    <div class="gift-box" id="gift-box" title="Click to open your gift!">
-                        <div class="gift-lid">
-                            <div class="gift-bow"></div>
-                        </div>
-                        <div class="gift-body">
-                            <div class="gift-ribbon-v"></div>
-                            <div class="gift-ribbon-h"></div>
-                        </div>
-                        <span class="gift-hint"><i class="fa-solid fa-gift"></i> Tap to open gift!</span>
-                    </div>
-                </div>
+                <div class="layer layer-bottom"></div>
+                <div class="cake-plate"></div>
+              </div>
             </div>
-        </main>
+
+            <!-- Make A Wish Banner / Celebration Popup Trigger -->
+            <button id="blow-all-btn" class="glow-btn">
+              <i class="fa-solid fa-cake-candles"></i> Blow Out All Candles
+            </button>
+          </div>
+
+          <!-- Interactive Wishes / Gift Box Section -->
+          <div class="gift-section">
+            <div
+              class="gift-box"
+              id="gift-box"
+              role="button"
+              tabindex="0"
+              aria-label="Open your birthday gift"
+              title="Click or press Enter to open your gift!"
+            >
+              <div class="gift-lid">
+                <div class="gift-bow"></div>
+              </div>
+              <div class="gift-body">
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+              </div>
+              <span class="gift-hint"
+                ><i class="fa-solid fa-gift"></i> Tap to open gift!</span
+              >
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Customization Modal Overlay -->
     <div class="modal-overlay" id="customizer-modal" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fa-solid fa-sliders"></i> Customize Birthday Card</h2>
-                <button class="close-btn" id="close-modal-btn">&times;</button>
-            </div>
-            <form id="customize-form" class="modal-body">
-                <div class="form-group">
-                    <label for="input-name">Recipient Name</label>
-                    <input type="text" id="input-name" value="Alex Morgan" placeholder="Enter name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="input-age">Age / Years</label>
-                    <input type="number" id="input-age" value="25" min="1" max="150" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="input-photo">Photo URL</label>
-                    <input type="url" id="input-photo" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" placeholder="https://example.com/photo.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="input-wish">Custom Birthday Message</label>
-                    <textarea id="input-wish" rows="3" placeholder="Write your heartfelt wish...">May your day be filled with joy, laughter, endless cake, and unforgettable moments! Wishing you another magnificent year ahead filled with love and success.</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Select Color Theme</label>
-                    <div class="theme-selector">
-                        <button type="button" class="theme-option active" data-theme="pastel" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
-                            Pastel
-                        </button>
-                        <button type="button" class="theme-option" data-theme="gold" style="background: linear-gradient(135deg, #bf953f, #fcf6ba);">
-                            Gold Party
-                        </button>
-                        <button type="button" class="theme-option" data-theme="neon" style="background: linear-gradient(135deg, #0f0c29, #24243e);">
-                            Dark Neon
-                        </button>
-                        <button type="button" class="theme-option" data-theme="rainbow" style="background: linear-gradient(135deg, #ff007f, #7f00ff, #00f0ff);">
-                            Rainbow
-                        </button>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="secondary-btn" id="reset-btn">Reset Defaults</button>
-                    <button type="submit" class="primary-btn">Save Changes ✨</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-sliders"></i> Customize Birthday Card</h2>
+          <button
+            class="close-btn"
+            id="close-modal-btn"
+            aria-label="Close customizer modal"
+          >
+            &times;
+          </button>
         </div>
+        <form id="customize-form" class="modal-body">
+          <div class="form-group">
+            <label for="input-name">Recipient Name</label>
+            <input
+              type="text"
+              id="input-name"
+              value="Alex Morgan"
+              placeholder="Enter name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="input-age">Age / Years</label>
+            <input
+              type="number"
+              id="input-age"
+              value="25"
+              min="1"
+              max="150"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="input-photo">Photo URL</label>
+            <input
+              type="url"
+              id="input-photo"
+              value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+              placeholder="https://example.com/photo.jpg"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="input-wish">Custom Birthday Message</label>
+            <textarea
+              id="input-wish"
+              rows="3"
+              placeholder="Write your heartfelt wish..."
+            >
+May your day be filled with joy, laughter, endless cake, and unforgettable moments! Wishing you another magnificent year ahead filled with love and success.</textarea
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Select Color Theme</label>
+            <div class="theme-selector">
+              <button
+                type="button"
+                class="theme-option active"
+                data-theme="pastel"
+                style="background: linear-gradient(135deg, #ff9a9e, #fecfef)"
+              >
+                Pastel
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                data-theme="gold"
+                style="background: linear-gradient(135deg, #bf953f, #fcf6ba)"
+              >
+                Gold Party
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                data-theme="neon"
+                style="background: linear-gradient(135deg, #0f0c29, #24243e)"
+              >
+                Dark Neon
+              </button>
+              <button
+                type="button"
+                class="theme-option"
+                data-theme="rainbow"
+                style="
+                  background: linear-gradient(
+                    135deg,
+                    #ff007f,
+                    #7f00ff,
+                    #00f0ff
+                  );
+                "
+              >
+                Rainbow
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="secondary-btn" id="reset-btn">
+              Reset Defaults
+            </button>
+            <button type="submit" class="primary-btn">Save Changes ✨</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Celebration Popup Modal -->
     <div class="celebration-modal" id="celebration-modal">
-        <div class="celebration-card">
-            <div class="celebration-icon">🎂✨</div>
-            <h2>Make A Wish!</h2>
-            <p>All candles are blown out! May all your dreams and wishes come true this year!</p>
-            <button id="close-celebration-btn" class="primary-btn">Yay! Thank You! 🎉</button>
-        </div>
+      <div class="celebration-card">
+        <div class="celebration-icon">🎂✨</div>
+        <h2>Make A Wish!</h2>
+        <p>
+          All candles are blown out! May all your dreams and wishes come true
+          this year!
+        </p>
+        <button id="close-celebration-btn" class="primary-btn">
+          Yay! Thank You! 🎉
+        </button>
+      </div>
     </div>
 
     <!-- Gift Revealed Modal -->
     <div class="gift-modal" id="gift-modal">
-        <div class="gift-reveal-card">
-            <div class="gift-sparkles">🎁✨</div>
-            <h2>Special Surprise!</h2>
-            <p id="gift-message">You've unlocked a year full of happiness, adventure, and sweet surprises!</p>
-            <button id="close-gift-modal" class="primary-btn">Awesome! ❤️</button>
-        </div>
+      <div class="gift-reveal-card">
+        <div class="gift-sparkles">🎁✨</div>
+        <h2>Special Surprise!</h2>
+        <p id="gift-message">
+          You've unlocked a year full of happiness, adventure, and sweet
+          surprises!
+        </p>
+        <button id="close-gift-modal" class="primary-btn">Awesome! ❤️</button>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
