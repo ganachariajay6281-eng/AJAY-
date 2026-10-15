@@ -1,18 +1,3 @@
-npm warn exec The following package was not found and will be installed: serve@14.2.6
- INFO  Accepting connections at http://localhost:8080
- HTTP  9/30/2026 5:49:51 AM ::1 HEAD /
- HTTP  9/30/2026 5:49:51 AM ::1 Returned 200 in 357 ms
- HTTP  9/30/2026 5:50:23 AM ::1 GET /
- HTTP  9/30/2026 5:50:23 AM ::1 Returned 200 in 25 ms
- HTTP  9/30/2026 5:50:23 AM ::1 GET /styles.css
- HTTP  9/30/2026 5:50:23 AM ::1 GET /script.js
- HTTP  9/30/2026 5:50:23 AM ::1 Returned 200 in 4 ms
- HTTP  9/30/2026 5:50:23 AM ::1 Returned 200 in 3 ms
- HTTP  9/30/2026 5:51:15 AM ::1 GET /
- HTTP  9/30/2026 5:51:15 AM ::1 Returned 200 in 1 ms
- HTTP  9/30/2026 5:51:15 AM ::1 GET /styles.css
- HTTP  9/30/2026 5:51:15 AM ::1 Returned 200 in 2 ms
- HTTP  9/30/2026 5:51:15 AM ::1 GET /script.js
- HTTP  9/30/2026 5:51:15 AM ::1 Returned 200 in 4 ms
-
- INFO  Gracefully shutting down. Please wait...
+127.0.0.1 - - [15/Oct/2026 17:46:14] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 17:46:14] "GET /script.js HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 17:46:14] "GET /styles.css HTTP/1.1" 200 -
