@@ -187,6 +187,29 @@ body {
     gap: 12px;
 }
 
+/* Focus visible states for accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.gift-box:focus-visible,
+.candle:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+.icon-btn:focus-visible,
+.close-btn:focus-visible {
+    border-radius: 50%;
+}
+
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible,
+.glow-btn:focus-visible,
+.primary-btn-sm:focus-visible {
+    border-radius: 30px;
+}
+
 /* Buttons */
 .icon-btn {
     position: relative;
