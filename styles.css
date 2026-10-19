@@ -894,6 +894,34 @@ body {
     line-height: 1.5;
 }
 
+/* Focus Visible Accessibility Styles */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+.icon-btn:focus-visible,
+.primary-btn-sm:focus-visible,
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible,
+.glow-btn:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
+.candle:focus-visible {
+    outline: 2px dashed var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.gift-box:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 6px;
+    border-radius: 12px;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 600px) {
     .top-bar {
