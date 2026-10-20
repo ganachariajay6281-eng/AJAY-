@@ -151,12 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('aria-label', `Candle ${i + 1}`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -311,9 +320,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
+    const openGift = () => {
         giftModal.classList.add('active');
         triggerConfettiBurst();
+    };
+
+    giftBox.addEventListener('click', openGift);
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGift();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            customizerModal.classList.remove('active');
+            celebrationModal.classList.remove('active');
+            giftModal.classList.remove('active');
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {

@@ -448,8 +448,12 @@ body {
     transition: transform 0.2s ease;
 }
 
-.candle:hover {
+.candle:hover,
+.candle:focus-visible {
     transform: scale(1.1);
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .candle .stick {
@@ -634,8 +638,11 @@ body {
     align-items: center;
 }
 
-.gift-box:hover {
+.gift-box:hover,
+.gift-box:focus-visible {
     transform: translateY(-5deg) rotate(-2deg);
+    outline: 3px solid var(--primary);
+    outline-offset: 6px;
 }
 
 .gift-lid {
