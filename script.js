@@ -151,12 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('aria-label', `Blow candle ${i + 1}`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -169,12 +178,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function openModal(modalEl) {
+        modalEl.classList.add('active');
+        modalEl.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal(modalEl) {
+        modalEl.classList.remove('active');
+        modalEl.setAttribute('aria-hidden', 'true');
+    }
+
+    function closeAllModals() {
+        closeModal(customizerModal);
+        closeModal(celebrationModal);
+        closeModal(giftModal);
+    }
+
     function checkAllCandlesBlown() {
         const allCandles = candlesLayer.querySelectorAll('.candle');
         const blownCandles = candlesLayer.querySelectorAll('.candle.blown-out');
         if (allCandles.length > 0 && allCandles.length === blownCandles.length) {
             setTimeout(() => {
-                celebrationModal.classList.add('active');
+                openModal(celebrationModal);
                 triggerConfettiBurst();
             }, 500);
         }
@@ -185,13 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
         allCandles.forEach((candle) => candle.classList.add('blown-out'));
         playCandleSound();
         setTimeout(() => {
-            celebrationModal.classList.add('active');
+            openModal(celebrationModal);
             triggerConfettiBurst();
         }, 400);
     });
 
     closeCelebrationBtn.addEventListener('click', () => {
-        celebrationModal.classList.remove('active');
+        closeModal(celebrationModal);
     });
 
     // --- 4. Audio Synthesizer (Happy Birthday Tune via Web Audio API) ---
@@ -311,22 +336,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
-        giftModal.classList.add('active');
+    function openGiftModal() {
+        openModal(giftModal);
         triggerConfettiBurst();
+    }
+
+    giftBox.addEventListener('click', openGiftModal);
+    giftBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGiftModal();
+        }
     });
 
     closeGiftModal.addEventListener('click', () => {
-        giftModal.classList.remove('active');
+        closeModal(giftModal);
     });
 
     // --- 6. Customization Modal & Theme Engine ---
     customizeBtn.addEventListener('click', () => {
-        customizerModal.classList.add('active');
+        openModal(customizerModal);
     });
 
     closeModalBtn.addEventListener('click', () => {
-        customizerModal.classList.remove('active');
+        closeModal(customizerModal);
+    });
+
+    // Close active modals with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAllModals();
+        }
     });
 
     // Theme selector options
@@ -349,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentData.wish = document.getElementById('input-wish').value || defaultData.wish;
 
         updateCardUI();
-        customizerModal.classList.remove('active');
+        closeModal(customizerModal);
         triggerConfettiBurst();
     });
 
