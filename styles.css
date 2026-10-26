@@ -634,8 +634,11 @@ body {
     align-items: center;
 }
 
-.gift-box:hover {
+.gift-box:hover,
+.gift-box:focus-visible {
     transform: translateY(-5deg) rotate(-2deg);
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
 }
 
 .gift-lid {
