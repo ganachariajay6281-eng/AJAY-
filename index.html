@@ -124,7 +124,7 @@
 
                 <!-- Interactive Wishes / Gift Box Section -->
                 <div class="gift-section">
-                    <div class="gift-box" id="gift-box" title="Click to open your gift!">
+                    <div class="gift-box" id="gift-box" title="Click to open your gift!" role="button" tabindex="0" aria-label="Open gift box">
                         <div class="gift-lid">
                             <div class="gift-bow"></div>
                         </div>
@@ -144,7 +144,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2><i class="fa-solid fa-sliders"></i> Customize Birthday Card</h2>
-                <button class="close-btn" id="close-modal-btn">&times;</button>
+                <button class="close-btn" id="close-modal-btn" aria-label="Close customize modal">&times;</button>
             </div>
             <form id="customize-form" class="modal-body">
                 <div class="form-group">
@@ -194,7 +194,7 @@
     </div>
 
     <!-- Celebration Popup Modal -->
-    <div class="celebration-modal" id="celebration-modal">
+    <div class="celebration-modal" id="celebration-modal" aria-hidden="true">
         <div class="celebration-card">
             <div class="celebration-icon">🎂✨</div>
             <h2>Make A Wish!</h2>
@@ -204,7 +204,7 @@
     </div>
 
     <!-- Gift Revealed Modal -->
-    <div class="gift-modal" id="gift-modal">
+    <div class="gift-modal" id="gift-modal" aria-hidden="true">
         <div class="gift-reveal-card">
             <div class="gift-sparkles">🎁✨</div>
             <h2>Special Surprise!</h2>
