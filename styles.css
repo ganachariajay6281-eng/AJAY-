@@ -446,10 +446,20 @@ body {
     height: 50px;
     cursor: pointer;
     transition: transform 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
 }
 
 .candle:hover {
     transform: scale(1.1);
+}
+
+.candle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .candle .stick {
@@ -625,6 +635,8 @@ body {
     width: 100px;
     height: 90px;
     background: #ff4757;
+    border: none;
+    padding: 0;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -632,10 +644,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    outline: none;
 }
 
 .gift-box:hover {
     transform: translateY(-5deg) rotate(-2deg);
+}
+
+.gift-box:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 6px;
 }
 
 .gift-lid {
