@@ -148,9 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
         candlesLayer.innerHTML = '';
         const numCandles = Math.min(Math.max(count, 1), 7); // Show 1 to 7 candles on cake
         for (let i = 0; i < numCandles; i++) {
-            const candle = document.createElement('div');
+            const candle = document.createElement('button');
+            candle.type = 'button';
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('aria-label', `Candle ${i + 1}, lit. Click to blow out.`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
@@ -164,6 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function blowCandle(candleEl) {
         if (!candleEl.classList.contains('blown-out')) {
             candleEl.classList.add('blown-out');
+            const idx = parseInt(candleEl.dataset.index, 10) + 1;
+            candleEl.setAttribute('aria-label', `Candle ${idx}, blown out.`);
             playCandleSound();
             checkAllCandlesBlown();
         }
@@ -182,7 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     blowAllBtn.addEventListener('click', () => {
         const allCandles = candlesLayer.querySelectorAll('.candle');
-        allCandles.forEach((candle) => candle.classList.add('blown-out'));
+        allCandles.forEach((candle) => {
+            candle.classList.add('blown-out');
+            const idx = parseInt(candle.dataset.index, 10) + 1;
+            candle.setAttribute('aria-label', `Candle ${idx}, blown out.`);
+        });
         playCandleSound();
         setTimeout(() => {
             celebrationModal.classList.add('active');
