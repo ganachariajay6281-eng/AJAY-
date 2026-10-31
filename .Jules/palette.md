@@ -1,0 +1,3 @@
+## 2026-10-31 - Modal Accessibility and Dismissal Pattern
+**Learning:** Custom modal overlays often lack keyboard Escape listeners, backdrop dismissal, and dialog ARIA attributes (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`), creating a keyboard trap and frustrating mobile/desktop users who instinctively click outside or hit Escape to dismiss dialogs.
+**Action:** When introducing or polishing modals, always ensure `role="dialog"`, `aria-modal="true"`, an accessible label on close buttons (`aria-label="Close"`), an Escape key listener, and backdrop click-to-dismiss handlers are attached.
