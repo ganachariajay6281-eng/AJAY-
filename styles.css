@@ -446,10 +446,17 @@ body {
     height: 50px;
     cursor: pointer;
     transition: transform 0.2s ease;
+    border-radius: 4px;
+    outline: none;
 }
 
-.candle:hover {
+.candle:hover,
+.candle:focus-visible {
     transform: scale(1.1);
+}
+
+.candle:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 71, 126, 0.4), 0 0 8px var(--primary);
 }
 
 .candle .stick {
