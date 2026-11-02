@@ -151,12 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('aria-label', `Candle ${i + 1}, lit`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -164,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function blowCandle(candleEl) {
         if (!candleEl.classList.contains('blown-out')) {
             candleEl.classList.add('blown-out');
+            const idx = parseInt(candleEl.dataset.index, 10) + 1;
+            candleEl.setAttribute('aria-label', `Candle ${idx}, blown out`);
             playCandleSound();
             checkAllCandlesBlown();
         }
@@ -381,6 +392,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const ageNum = parseInt(currentData.age, 10) || 5;
         createCandles(ageNum);
     }
+
+    // Keyboard navigation: Close any active modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            customizerModal.classList.remove('active');
+            celebrationModal.classList.remove('active');
+            giftModal.classList.remove('active');
+        }
+    });
 
     // Initial UI render
     updateCardUI();
