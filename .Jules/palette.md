@@ -1,0 +1,3 @@
+## 2026-11-03 - Accessible Custom Interactive Elements (Candles & Gift Box)
+**Learning:** In interactive greeting/celebration web applications, custom graphical elements rendered as `div`s (such as candles on a cake or gift boxes) are naturally engaging touch/click targets but completely invisible to keyboard and assistive technology users unless assigned explicit `role="button"`, `tabindex="0"`, dynamic state descriptions (`aria-label`, `aria-disabled`), and standard keydown listeners (`Enter`/` `).
+**Action:** When creating or polishing custom interactive DOM elements, always pair mouse interaction with keyboard activation (`Enter`/` `) and clear `:focus-visible` styling matching the theme's accent color.
