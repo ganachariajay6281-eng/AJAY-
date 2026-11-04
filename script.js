@@ -151,12 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const candle = document.createElement('div');
             candle.className = 'candle';
             candle.dataset.index = i;
+            candle.setAttribute('role', 'button');
+            candle.setAttribute('tabindex', '0');
+            candle.setAttribute('aria-label', `Candle ${i + 1}, lit. Press to blow out`);
             candle.innerHTML = `
                 <div class="flame"></div>
                 <div class="wick"></div>
                 <div class="stick"></div>
             `;
             candle.addEventListener('click', () => blowCandle(candle));
+            candle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    blowCandle(candle);
+                }
+            });
             candlesLayer.appendChild(candle);
         }
     }
@@ -164,6 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function blowCandle(candleEl) {
         if (!candleEl.classList.contains('blown-out')) {
             candleEl.classList.add('blown-out');
+            const idx = parseInt(candleEl.dataset.index, 10) + 1;
+            candleEl.setAttribute('aria-label', `Candle ${idx}, blown out`);
+            candleEl.setAttribute('aria-pressed', 'true');
             playCandleSound();
             checkAllCandlesBlown();
         }
@@ -182,12 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     blowAllBtn.addEventListener('click', () => {
         const allCandles = candlesLayer.querySelectorAll('.candle');
-        allCandles.forEach((candle) => candle.classList.add('blown-out'));
-        playCandleSound();
-        setTimeout(() => {
-            celebrationModal.classList.add('active');
-            triggerConfettiBurst();
-        }, 400);
+        allCandles.forEach((candle) => blowCandle(candle));
     });
 
     closeCelebrationBtn.addEventListener('click', () => {
