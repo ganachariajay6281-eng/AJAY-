@@ -36,6 +36,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const giftModal = document.getElementById('gift-modal');
     const closeGiftModal = document.getElementById('close-gift-modal');
 
+    // Modal accessibility & focus management
+    let activeModal = null;
+    let previousActiveElement = null;
+
+    function openModal(modal, triggerEl = null) {
+        if (!modal) return;
+        previousActiveElement = triggerEl || document.activeElement;
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        activeModal = modal;
+        const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable) focusable.focus();
+    }
+
+    function closeModal(modal) {
+        if (!modal) return;
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        if (activeModal === modal) activeModal = null;
+        if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+            previousActiveElement.focus();
+            previousActiveElement = null;
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && activeModal) {
+            closeModal(activeModal);
+        }
+    });
+
+    [customizerModal, celebrationModal, giftModal].forEach((modal) => {
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        }
+    });
+
     // --- State Defaults ---
     const defaultData = {
         name: 'Alex Morgan',
@@ -174,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const blownCandles = candlesLayer.querySelectorAll('.candle.blown-out');
         if (allCandles.length > 0 && allCandles.length === blownCandles.length) {
             setTimeout(() => {
-                celebrationModal.classList.add('active');
+                openModal(celebrationModal, blowAllBtn);
                 triggerConfettiBurst();
             }, 500);
         }
@@ -185,13 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
         allCandles.forEach((candle) => candle.classList.add('blown-out'));
         playCandleSound();
         setTimeout(() => {
-            celebrationModal.classList.add('active');
+            openModal(celebrationModal, blowAllBtn);
             triggerConfettiBurst();
         }, 400);
     });
 
     closeCelebrationBtn.addEventListener('click', () => {
-        celebrationModal.classList.remove('active');
+        closeModal(celebrationModal);
     });
 
     // --- 4. Audio Synthesizer (Happy Birthday Tune via Web Audio API) ---
@@ -312,21 +353,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 5. Gift Modal Interaction ---
     giftBox.addEventListener('click', () => {
-        giftModal.classList.add('active');
+        openModal(giftModal, giftBox);
         triggerConfettiBurst();
     });
 
     closeGiftModal.addEventListener('click', () => {
-        giftModal.classList.remove('active');
+        closeModal(giftModal);
     });
 
     // --- 6. Customization Modal & Theme Engine ---
     customizeBtn.addEventListener('click', () => {
-        customizerModal.classList.add('active');
+        openModal(customizerModal, customizeBtn);
     });
 
     closeModalBtn.addEventListener('click', () => {
-        customizerModal.classList.remove('active');
+        closeModal(customizerModal);
     });
 
     // Theme selector options
@@ -349,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentData.wish = document.getElementById('input-wish').value || defaultData.wish;
 
         updateCardUI();
-        customizerModal.classList.remove('active');
+        closeModal(customizerModal);
         triggerConfettiBurst();
     });
 
