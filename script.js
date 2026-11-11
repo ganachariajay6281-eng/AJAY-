@@ -169,14 +169,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function openCelebrationModal() {
+        celebrationModal.classList.add('active');
+        celebrationModal.setAttribute('aria-hidden', 'false');
+        closeCelebrationBtn.focus();
+        triggerConfettiBurst();
+    }
+
+    function closeCelebrationModal() {
+        celebrationModal.classList.remove('active');
+        celebrationModal.setAttribute('aria-hidden', 'true');
+        blowAllBtn.focus();
+    }
+
     function checkAllCandlesBlown() {
         const allCandles = candlesLayer.querySelectorAll('.candle');
         const blownCandles = candlesLayer.querySelectorAll('.candle.blown-out');
         if (allCandles.length > 0 && allCandles.length === blownCandles.length) {
-            setTimeout(() => {
-                celebrationModal.classList.add('active');
-                triggerConfettiBurst();
-            }, 500);
+            setTimeout(openCelebrationModal, 500);
         }
     }
 
@@ -184,15 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const allCandles = candlesLayer.querySelectorAll('.candle');
         allCandles.forEach((candle) => candle.classList.add('blown-out'));
         playCandleSound();
-        setTimeout(() => {
-            celebrationModal.classList.add('active');
-            triggerConfettiBurst();
-        }, 400);
+        setTimeout(openCelebrationModal, 400);
     });
 
-    closeCelebrationBtn.addEventListener('click', () => {
-        celebrationModal.classList.remove('active');
-    });
+    closeCelebrationBtn.addEventListener('click', closeCelebrationModal);
 
     // --- 4. Audio Synthesizer (Happy Birthday Tune via Web Audio API) ---
     function playCandleSound() {
@@ -311,22 +316,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 5. Gift Modal Interaction ---
-    giftBox.addEventListener('click', () => {
+    function openGiftModal() {
         giftModal.classList.add('active');
+        giftModal.setAttribute('aria-hidden', 'false');
+        closeGiftModal.focus();
         triggerConfettiBurst();
-    });
+    }
 
-    closeGiftModal.addEventListener('click', () => {
+    function closeGiftModalHandler() {
         giftModal.classList.remove('active');
-    });
+        giftModal.setAttribute('aria-hidden', 'true');
+        giftBox.focus();
+    }
+
+    giftBox.addEventListener('click', openGiftModal);
+    closeGiftModal.addEventListener('click', closeGiftModalHandler);
 
     // --- 6. Customization Modal & Theme Engine ---
-    customizeBtn.addEventListener('click', () => {
+    function openCustomizerModal() {
         customizerModal.classList.add('active');
-    });
+        customizerModal.setAttribute('aria-hidden', 'false');
+        document.getElementById('input-name').focus();
+    }
 
-    closeModalBtn.addEventListener('click', () => {
+    function closeCustomizerModal() {
         customizerModal.classList.remove('active');
+        customizerModal.setAttribute('aria-hidden', 'true');
+        customizeBtn.focus();
+    }
+
+    customizeBtn.addEventListener('click', openCustomizerModal);
+    closeModalBtn.addEventListener('click', closeCustomizerModal);
+
+    // Keyboard support: Close modals with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (customizerModal.classList.contains('active')) {
+                closeCustomizerModal();
+            } else if (celebrationModal.classList.contains('active')) {
+                closeCelebrationModal();
+            } else if (giftModal.classList.contains('active')) {
+                closeGiftModalHandler();
+            }
+        }
     });
 
     // Theme selector options
@@ -349,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentData.wish = document.getElementById('input-wish').value || defaultData.wish;
 
         updateCardUI();
-        customizerModal.classList.remove('active');
+        closeCustomizerModal();
         triggerConfettiBurst();
     });
 
